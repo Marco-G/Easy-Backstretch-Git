@@ -30,8 +30,7 @@ to do
 == Changelog ==
 
 = 1.1 =
-
-Added preload
+* Added preload
 
 = 1.0 =
 * First Deploy
