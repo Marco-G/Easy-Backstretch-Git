@@ -374,6 +374,14 @@ This plugin inherits the GPL license from it's parent system, WordPress.
         var len = images.length;
         var totalDuration = (backstretchSettings.fade + backstretchSettings.duration);
         var timer = null;
+
+            var preload = function() {
+            for( var i = 0; i < images.length; ++i ) {
+                 var img = document.createElement( 'img' );
+                 var src = images[i];
+                 img.src = src;
+            }
+        };
         var rotate = function() {
             $('<?php echo $easy_backstretch_settings["div"]; ?>').backstretch(images[0], backstretchSettings);
             timer = setInterval(function() {
@@ -384,7 +392,8 @@ This plugin inherits the GPL license from it's parent system, WordPress.
                 $('<?php echo $easy_backstretch_settings["div"]; ?>').backstretch(images[index], backstretchSettings);     
             }, totalDuration); 
         };
-        rotate();
+        $.when( preload() ).done(
+            rotate() );
         });
         </script>
         <?php
